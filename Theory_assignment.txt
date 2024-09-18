@@ -1,0 +1,238 @@
+1. What is the difference between a function and a method in Python?
+
+Ans: Function :
+     ---------
+  ->  A self-contained block of code that performs a specific task.
+  ->  It is defined using the “def” keyword.
+  ->  Functions are re-usable, it saves the developers time.
+  ->  It keeps the code neat, organised and clean.
+  ->  Can be defined independently of any object.
+
+              Example:
+                 def my_function (n):
+                    return n+1
+              my_function(2)
+
+              Output is 3
+     method :
+    ---------
+  ->  A function that in-built defined
+  ->  methods are call on a specific object instances
+  ->           example:
+                string = 'somesh'
+                string.upper()
+
+2. Explain the concept of function arguments and parameters in Python.?
+
+Ans:  Arguments
+      ---------
+    -> These are the actual values that are passed to a function when it is called.
+    -> They correspond to the parameters defined in the function's definition.
+    -> When a function is called, the arguments are evaluated and assigned to the corresponding parameters.
+
+      Parameters
+      ----------
+    -> These are the variables defined within the parentheses of a function's definition.
+    -> They act as placeholders for the values that will be passed to the function.
+    -> When a function is defined, the parameters specify the expected input values.
+
+               examle:  def greetings (name):
+                            print(f'hello, {name} !')
+                        greetings('Somesh')
+
+       here, name given in the function parenthsis is a parameter and somesh is an arguments.
+
+
+3. What are the different ways to define and call a function in Python?
+
+Ans : There are many way to define and call a function in python programming as follows,
+
+  Regular_function
+  ----------------
+    -> This function defined the def keyword followed by the function name and parameter
+
+                def my_function (name):
+                print(f'hello {name} !')
+
+                my_function('somesh')
+
+                output is hello somesh !
+
+  Lambda function/short-hand function
+  -----------------------------------
+     -> This Lambda functions are anonymous, used for shortening the code length.
+
+              result= lambda a, b: a+b
+              result(47, 11)
+              output is 58
+
+  reduce function
+  ----------------
+    -> reduce is not an in-built python keyword.
+    -> while using reduce we need to import it from funtools library
+    -> reduce will take always two arguments.
+
+              from funtools import reduce
+
+              l1 = [1,2,3,4,5,6,7,8,9]
+              reduce(lambda a, b: a+b, l1)
+              output will be 45
+
+  map function
+  ------------
+    ->  map function execute a specified function for each of item of an iterable.
+
+             a = range(10)
+
+             def power_value(a):
+                 return a**2
+             mapping = list(map(power_value, a))
+             output is 
+
+  filter function
+  ---------------
+    -> this function used to filter the elements from an iterable based on some condition
+
+            a = ['somes', 'dash', 'pw', 'skills', 'datascience']
+
+            result = filter(lambda a: len(a) <= 5, a)
+            list(result)
+            output is ['somes','dash', 'pw']
+
+  function inside function
+   -----------------------
+     -> we also can trigger a function inside a function based on the requirement as below
+              def list_of_marks (**arg):            ## parent function start
+    
+              def sum_mark_list(result):            ## child function start
+                  return sum(result)                ## child function end
+    
+              result = []                           
+    
+              for sub, marks in arg.items():
+                  result.append(marks)
+        
+              return sum_mark_list(result)          ##  parent function end
+
+              list_of_marks(a = 33, b= 43, c= 53)   ##  execution part
+
+ 4. What is the purpose of the `return` statement in a Python function?
+
+    -> This Statement Determines the value that the function will return. If not included return statement, the function defaults to returning None.
+
+              def sum_value (x, y):
+                  return x+y               ## here the statement is return the sum of two argument x and y in to a varible my_value
+              my_value = sum_value(7, 3)
+              
+              print(type(my_value))        ## incase return statement not mentioned the function will give output as nonetype
+              <class 'NoneType'>
+
+5. What are iterators in Python and how do they differ from iterables?
+
+    -> Iterable is an object capable of returning an iterator, where as a iterator is an object that performs the iteration over the iterable, using the next() method.
+
+      example:   list1 = [1,2,3,4]          ## this is iterable
+                 my_list = iter(list1)      ## getting an iterator
+
+                 here one by one it is getting the iterator using next() method
+
+                 next(my_list)  --->  1
+                 next(my_list)  --->  2
+                 next(my_list)  --->  3
+                 next(my_list)  --->  4
+
+ 6. Explain the concept of generators in Python and how they are defined.?
+
+    -> Generators are a simple way to create iterators using functions and the yield keyword instead of returning values.
+    -> in return statement completely exits a function, where as the yield statement eturns a value but pauses the function, allowing it to continue from where it stopped the next time it's called.
+    -> produce values one at a time and only when required
+    -> generators use minimal memory.
+
+         example :   def new(n):
+                         a = 0
+                         b = 1
+                         for i in range(n):
+                             yield a
+                             a, b = b, a + b 
+                      f = new(1000000000000000000000)
+                      next(f)  -----> 0
+                      next(f)  -----> 1
+                      next(f)  -----> 2
+                      next(f)  -----> 3
+                      next(f)  -----> 5
+                      next(f)  -----> 8
+                      next(f)  -----> 13
+
+                     up to the given value new having()
+
+ 7. What are the advantages of using generators over regular functions?
+
+    list of the advantages of generators function
+    -> Only one value is stored at a time, saving memory when computing big value.
+    -> Values are generated when needed, preventing the entire data from being loaded into memory.
+    -> Faster execution when working with large datasets or streams of data.
+    -> Generators remember where they left off, making them suitable for iteration further.
+  
+    syntax of a generator function with example
+                     def generator_function():
+                         for i in range(1000000):
+                         yield i                        # yields one value at a time
+                         next(i)                        # using next() get the next value
+
+ 8. What is a lambda function in Python and when is it typically used?
+
+     -> Lambda functions are small, anonymous functions defined using the lambda keyword.
+     -> They are used for creating small, throwaway functions without the need to formally define a function using def
+     -> here no need of "return" required
+
+             example :  lambda_function = lambda x, y: x + y
+                        lambda_function(5,3) 
+
+ 9. Explain the purpose and usage of the `map()` function in Python.
+
+     ->  The map function applies a given function to all items in an input iterable (like a list) and returns an iterator with the results.
+     ->  map function Used to transform each item in an iterable by applying the specified function. example as follows
+
+                        list_values = [1,2,3,4,5]                                           # list of some int numbers
+                        power_of_list_values = list(map(lambda x: x**x, list_values))       #
+                        list_values = [1,2,3,4,5]
+
+                        output is [1, 4, 27, 256, 3125]
+                   
+
+10. What is the difference between `map()`, `reduce()`, and `filter()` functions in Python?
+
+ map                                                                              
+-----                                                                             
+--> The map function applies a given function to all items in an input iterable (like a list) and returns an iterator with the results.
+--> in-built python keyword
+        example:  numbers = [1, 2, 3, 4]
+                  result = list(map(lambda x: x * 2, numbers))
+
+reduce 
+-------
+--> The reduce function from the functools module applies a given function cumulatively to the items of a sequence, from left to right,
+to reduce the sequence to a single value.
+--> it is not a built in python keyword, need to import from funtools library.
+--> reduce function only can take two argument
+        example:  from functools import reduce
+                  numbers = [1, 2, 3, 4]
+                  result = reduce(lambda x, y: x + y, numbers)
+
+filter
+------
+-> The filter function constructs an iterator from elements of an iterable for which a specified function returns True.
+-> in-built python keyword
+
+          exampole :  numbers = [1, 2, 3, 4]
+                      result = list(filter(lambda x: x % 2 == 0, numbers))        
+
+11.  attachment is in drive
+
+
+
+
+
+
+
+   
